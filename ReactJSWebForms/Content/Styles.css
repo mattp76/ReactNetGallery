@@ -1,0 +1,51 @@
+﻿
+* {
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+}
+.slides {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+.slide {
+    display: none;
+}
+.slide.slide--active {
+    display: block;
+}
+.slide img {
+    height: 200px;
+}
+.toggle {
+    background: blue none repeat scroll 0 0;
+    color: white;
+    display: block;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+}
+.toggle-prev {
+    left: 0;
+}
+.toggle--next {
+    right: 0;
+}
+.pagination {
+    margin: 20px;
+    text-align: center;
+}
+.pager {
+    background-color: red;
+    display: inline-block;
+    height: 20px;
+    margin: 10px;
+    overflow: hidden;
+    text-indent: -9000px;
+    white-space: nowrap;
+    width: 20px;
+}

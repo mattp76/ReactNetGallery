@@ -1,0 +1,79 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ReactJSWebForms.SiteMaster" %>
+<%@ Register Src="UserControls/ReactUserControl.ascx" TagName="ReactGallery" TagPrefix="uc" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello React!</title>
+  <script src="http://fb.me/react-with-addons-0.12.2.js"></script>
+  <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+  <webopt:BundleReference ID="BundleReference1" runat="server" Path="~/Content/css" /> 
+</head>
+<body>
+<div id="app"></div>
+<script type="text/jsx">
+
+var data = [
+   {
+      Id:41105,
+      ItemIndex:0,
+      Name:"1",
+      Title:"1",
+      IsSelected:true,
+      ThumbnailImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/40974/9-clutch-(2).jpg?Height=225\u0026Width=150\u0026Class=upsize\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ThumbnailImageAltText:null,
+      Image:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/40974/9-clutch-(2).jpg?MaxHeight=650\u0026MaxWidth=803\u0026Constrain=true\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      LargeImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/40974/9-clutch-(2).jpg?Width=1900\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ImageCaption:null,
+      ImageAltText:null,
+      Summary:"\u003cstrong\u003e1. Hold me closer\u003c/strong\u003e\u003cbr\u003e\nThe fash pack are clutching onto this wardrobe staple; don\u0027t expect the oversized carry-all to go anywhere any time soon."
+   },
+   {
+      Id:41144,
+      ItemIndex:1,
+      Name:"2",
+      Title:"2",
+      IsSelected:false,
+      ThumbnailImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41144/9-clutch-(1).jpg?Height=225\u0026Width=150\u0026Class=upsize\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ThumbnailImageAltText:null,
+      Image:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41144/9-clutch-(1).jpg?MaxHeight=650\u0026MaxWidth=803\u0026Constrain=true\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      LargeImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41144/9-clutch-(1).jpg?Width=1900\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ImageCaption:null,
+      ImageAltText:null,
+      Summary:"\u003cstrong\u003e1. Hold me closer\u003c/strong\u003e\u003cbr\u003e\nThe fash pack are clutching onto this wardrobe staple; don\u0027t expect the oversized carry-all to go anywhere any time soon."
+   },
+   {
+      Id:41145,
+      ItemIndex:2,
+      Name:"3",
+      Title:"3",
+      IsSelected:false,
+      ThumbnailImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41145/2-flatforms-(1).jpg?Height=225\u0026Width=150\u0026Class=upsize\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ThumbnailImageAltText:null,
+      Image:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41145/2-flatforms-(1).jpg?MaxHeight=650\u0026MaxWidth=803\u0026Constrain=true\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      LargeImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41145/2-flatforms-(1).jpg?Width=1900\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ImageCaption:null,
+      ImageAltText:null,
+      Summary:"\u003cstrong\u003e2. Flat out\u003c/strong\u003e\u003cbr\u003e\nFlatform sneakers are the cool girl\u0027s heel - height AND cred with minimal fuss."
+   },
+   {
+      Id:41146,
+      ItemIndex:3,
+      Name:"4",
+      Title:"4",
+      IsSelected:false,
+      ThumbnailImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41146/2-flatforms-(2).jpg?Height=225\u0026Width=150\u0026Class=upsize\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ThumbnailImageAltText:null,
+      Image:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41146/2-flatforms-(2).jpg?MaxHeight=650\u0026MaxWidth=803\u0026Constrain=true\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      LargeImage:"//assets.cougar.nineentertainment.com.au/Assets/Elle/2014/09/15/41146/2-flatforms-(2).jpg?Width=1900\u0026Mode=Crop\u0026VAlign=Top\u0026Align=Center\u0026anchor=TopCenter",
+      ImageCaption:null,
+      ImageAltText:null,
+      Summary:"\u003cstrong\u003e2. Flat out\u003c/strong\u003e\u003cbr\u003e\nFlatform sneakers are the cool girl\u0027s heel - height AND cred with minimal fuss."
+   },
+];
+</script>
+
+<script type="text/jsx" src="Scripts/Components/Slideshow.jsx">
+
+</body>
+</html>
