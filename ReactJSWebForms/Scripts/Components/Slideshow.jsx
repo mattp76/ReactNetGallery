@@ -40,6 +40,9 @@ var actions = {
 }
 
 var Slideshow = React.createClass({
+ getInitialState: function() {
+    return {data: []};
+  },
   render: function() {
     return (
       <div className="slideshow">

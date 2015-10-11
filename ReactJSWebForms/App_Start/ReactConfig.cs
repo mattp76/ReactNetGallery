@@ -21,7 +21,7 @@ namespace ReactJSWebForms
 			// your components as well as all of their dependencies.
 			// See http://reactjs.net/ for more information. Example:
             ReactSiteConfiguration.Configuration
-                .AddScript("~/Scripts/components/gallery.jsx");
+                .AddScript("~/Scripts/components/SlideshowUC.jsx");
 		}
 	}
 }

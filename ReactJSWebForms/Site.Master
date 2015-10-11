@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ReactJSWebForms.SiteMaster" %>
-<%@ Register Src="UserControls/ReactUserControl.ascx" TagName="ReactGallery" TagPrefix="uc" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +9,7 @@
   <webopt:BundleReference ID="BundleReference1" runat="server" Path="~/Content/css" /> 
 </head>
 <body>
+
 <div id="app"></div>
 <script type="text/jsx">
 
