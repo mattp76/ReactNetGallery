@@ -4,14 +4,17 @@ var state = {
   data        : []
 }
 
+var bauerAds = {
+   slots: []
+} 
 
 var SlideshowUC = React.createClass({
   render: function() {
-
     state.data = this.props.data;
     return (
       <div className="slideshow">
-	  <Slides data={JSON.parse(state.data)} />
+	    <Slides data={JSON.parse(state.data)} />
+	    <Pagination data={JSON.parse(state.data)} />
         <Controls />
       </div>
     );
@@ -19,42 +22,22 @@ var SlideshowUC = React.createClass({
 });
 
 
-// Render
-function render(state) {
-  React.render(
-    <SlideshowUC data={state.data} />,
-    document.getElementById('react1')
-  );
-}
-
-
 // Slides
 var Slides = React.createClass({
-  slideToRender: function(slideNode, isActive) {
-	
-	   console.log(slideNode);
-		return (
-		 <Slide active={isActive} slidetype={slideNode.SlideType} key={slideNode.ItemIndex} Image={slideNode.Image} ImageAltText={slideNode.ImageAltText} Name={slideNode.Name} ImageCaption={slideNode.ImageCaption} Summary={slideNode.Summary} />
-		
-		 );
-      
-	
-  },
   render: function() {
     var slidesNodes = this.props.data.map(function (slideNode, index) {
     var isActive = state.currentSlide === index;
-      
+
 	  if (slideNode.SlideType == 'slide') {
-	
 	  return (
-	     <Slide active={isActive} slidetype={slideNode.SlideType} key={slideNode.ItemIndex} Image={slideNode.Image} ImageAltText={slideNode.ImageAltText} Name={slideNode.Name} ImageCaption={slideNode.ImageCaption} Summary={slideNode.Summary} />
+	     <Slide Active={isActive} Slidetype={slideNode.SlideType} Index={slideNode.ItemIndex} Image={slideNode.Image} ImageAltText={slideNode.ImageAltText} Name={slideNode.Name} ImageCaption={slideNode.ImageCaption} Summary={slideNode.Summary} />
 		);
 	  }
 
 	 if (slideNode.SlideType == 'mrec') {
 	
 	  return (
-	     <SlideMrec active={isActive} slidetype={slideNode.SlideType} key={slideNode.ItemIndex} Image={slideNode.Image} ImageAltText={slideNode.ImageAltText} Name={slideNode.Name} ImageCaption={slideNode.ImageCaption} Summary={slideNode.Summary} />
+	     <SlideMrec Active={isActive} Slidetype={slideNode.SlideType} Index={slideNode.ItemIndex} Name={slideNode.Name} Summary={slideNode.Summary} />
 		);
 	  }
 
@@ -62,7 +45,7 @@ var Slides = React.createClass({
 	  if (slideNode.SlideType == 'last') {
 	
 	  return (
-	     <SlideLast active={isActive} slidetype={slideNode.SlideType} key={slideNode.ItemIndex} Image={slideNode.Image} ImageAltText={slideNode.ImageAltText} Name={slideNode.Name} ImageCaption={slideNode.ImageCaption} Summary={slideNode.Summary} />
+	     <SlideLast Active={isActive} Slidetype={slideNode.SlideType} Index={slideNode.ItemIndex}  Name={slideNode.Name} Summary={slideNode.Summary} />
 		);
 	  }
 
@@ -82,7 +65,7 @@ var Slide = React.createClass({
   render: function() {
     var classes = React.addons.classSet({
       'slide': true,
-      'slide--active': this.props.active
+      'slide--active': this.props.Active
     });
     return (
       <div className={classes}>
@@ -97,18 +80,60 @@ var Slide = React.createClass({
 
 // Single Slide MREC
 var SlideMrec = React.createClass({
+  buildAdSlot: function(index) {
+	if (index == state.currentSlide) {
+	  bauerAds.slots[index] = {adSlot: 'mobile-ad-' + index, index: index, isRendered: false, type: 'MREC', size: {width: 300, height: 250}};
+	}
+  },
+ renderAd: function(index) {
+	if (index == state.currentSlide) {
+	  console.log("Rendering current slide ad " + index)
+      renderDFPAd(index)
+	}
+  },
   render: function() {
     var classes = React.addons.classSet({
       'slide': true,
-      'slide--active': this.props.active
+      'slide--active': this.props.Active
     });
+
     return (
       <div className={classes}>
-      <div className='headline'>{this.props.Name}</div>
+
+	   <div className='mobile-ad' id={'mobile-ad-' + this.props.Index}></div>					
+	    
+		{this.buildAdSlot(this.props.Index)}
+		{this.renderAd(this.props.Index)}
+
       </div>
     );
   }
 });
+
+
+function renderDFPAd(index) {
+
+   console.log("renderDFPAd " + index);
+   console.log(bauerAds.slots[index]);
+
+   if (typeof bauerAds.slots[index] != 'undefined' && bauerAds.slots[index] != null) {
+
+	    var adSlot = bauerAds.slots[index].adSlot;
+	    var pos = bauerAds.slots[index].index;
+	    var height = bauerAds.slots[index].size.height;
+	    var width = bauerAds.slots[index].size.width;
+
+		if (!bauerAds.slots[index].isRendered) {
+		    googletag.defineSlot(bauerAds.section, [width, height], adSlot).setTargeting('pos', [pos]).addService(googletag.pubads());
+			bauerAds.slots[index].isRendered = true;
+		}
+
+		googletag.display(adSlot);
+		googletag.pubads().refresh([adSlot]);
+	}
+
+
+}
 
 
 // Single Slide Last Item
@@ -116,7 +141,7 @@ var SlideLast = React.createClass({
   render: function() {
     var classes = React.addons.classSet({
       'slide': true,
-      'slide--active': this.props.active
+      'slide--active': this.props.Active
     });
     return (
       <div className={classes}>
@@ -127,7 +152,33 @@ var SlideLast = React.createClass({
 });
 
 
+var Pagination = React.createClass({
+  render: function() {
+    var paginationNodes = this.props.data.map(function (paginationNode, index) {
+      return (
+        <Pager id={paginationNode.ItemIndex} Name={paginationNode.ItemIndex}  />
+      );
+    });
+    return (
+      <div className="pagination">
+        {paginationNodes}
+      </div>
+    );
+  }
+});
 
+
+var Pager = React.createClass({
+  toggleSlide: function() {
+    console.log('toggle: ' + this.props.id);
+    actions.toggleSlide(this.props.id);
+  },
+  render: function() {
+    return (
+      <span className="pager" onClick={this.toggleSlide}>{this.props.Name}</span>
+    );
+  }
+});
 
 
 var Controls = React.createClass({
@@ -142,23 +193,8 @@ var Controls = React.createClass({
   render: function() {
     return (
       <div className="controls">
-        <div className="toggle toggle--prev" onClick={this.togglePrev}>Prev</div>
-        <div className="toggle toggle--next" onClick={this.toggleNext}>Next</div>
-      </div>
-    );
-  }
-});
-
-var Pagination = React.createClass({
-  render: function() {
-    var paginationNodes = this.props.data.map(function (paginationNode, index) {
-      return (
-        <Pager id={paginationNode.ItemIndex} key={paginationNode.ItemIndex} Name={paginationNode.ItemIndex}  />
-      );
-    });
-    return (
-      <div className="pagination">
-        {paginationNodes}
+        <div className="toggle toggle--prev" onClick={this.togglePrev}></div>
+        <div className="toggle toggle--next" onClick={this.toggleNext}></div>
       </div>
     );
   }
@@ -194,7 +230,9 @@ var actions = {
   },
   toggleSlide: function(id) {
     console.log("something worked");
-    var index = state.data.map(function (el) {
+	var parsedJson = JSON.parse(state.data);
+
+    var index = parsedJson.map(function (el) {
       return (
         el.ItemIndex
       );
@@ -206,22 +244,19 @@ var actions = {
 }
 
 
-var Pager = React.createClass({
-  toggleSlide: function() {
-    console.log('toggle: ' + this.props.id);
-    actions.toggleSlide(this.props.id);
-  },
-  render: function() {
-    return (
-      <span className="pager" onClick={this.toggleSlide}>{this.props.Name}</span>
-    );
-  }
-});
+// Render
+function render(state) {
+  React.render(
+    <SlideshowUC data={state.data} />,
+    document.getElementById('react1')
+  );
+}
+
 
 var EmptyMessage = React.createClass({
-  render: function() {
-    return (
-      <div className="empty-message">No Data</div>
-    );
-  }
+	render: function() {
+	return (
+		<div className="empty-message">No Data</div>
+	);
+	}
 });

@@ -4,41 +4,6 @@ var state = {
   data        : []
 }
 
-// State transitions
-var actions = {
-  toggleNext: function() {
-    console.log("something worked");
-    var current = state.currentSlide;
-    var next = current + 1;
-    if (next > state.data.length - 1) {
-      next = 0;
-    }
-    state.currentSlide = next;
-    render(state)
-  },
-  togglePrev: function() {
-    console.log("something worked");
-    var current = state.currentSlide;
-    var prev = current - 1;
-    if (prev < 0) {
-      prev = state.data.length - 1;
-    }
-    state.currentSlide = prev;
-    render(state);
-  },
-  toggleSlide: function(id) {
-    console.log("something worked");
-    var index = state.data.map(function (el) {
-      return (
-        el.ItemIndex
-      );
-    });
-    var currentIndex = index.indexOf(id);
-    state.currentSlide = currentIndex;
-    render(state);
-  }
-}
-
 var Slideshow = React.createClass({
  getInitialState: function() {
     return {data: []};
@@ -60,7 +25,7 @@ var Slides = React.createClass({
     var slidesNodes = this.props.data.map(function (slideNode, index) {
     var isActive = state.currentSlide === index;
       return (
-        <Slide active={isActive} key={slideNode.ItemIndex} Image={slideNode.Image} ImageAltText={slideNode.ImageAltText} Name={slideNode.Name} ImageCaption={slideNode.ImageCaption} Summary={slideNode.Summary} />
+        <Slide active={isActive} id={slideNode.ItemIndex} Image={slideNode.Image} ImageAltText={slideNode.ImageAltText} Name={slideNode.Name} ImageCaption={slideNode.ImageCaption} Summary={slideNode.Summary} />
       
 	  );
     });
@@ -112,7 +77,7 @@ var Pagination = React.createClass({
   render: function() {
     var paginationNodes = this.props.data.map(function (paginationNode, index) {
       return (
-        <Pager id={paginationNode.ItemIndex} key={paginationNode.ItemIndex} Name={paginationNode.ItemIndex}  />
+        <Pager id={paginationNode.ItemIndex} Name={paginationNode.ItemIndex}  />
       );
     });
     return (
@@ -142,6 +107,44 @@ var EmptyMessage = React.createClass({
     );
   }
 });
+
+
+
+// State transitions
+var actions = {
+  toggleNext: function() {
+    console.log("something worked");
+    var current = state.currentSlide;
+    var next = current + 1;
+    if (next > state.data.length - 1) {
+      next = 0;
+    }
+    state.currentSlide = next;
+    render(state)
+  },
+  togglePrev: function() {
+    console.log("something worked");
+    var current = state.currentSlide;
+    var prev = current - 1;
+    if (prev < 0) {
+      prev = state.data.length - 1;
+    }
+    state.currentSlide = prev;
+    render(state);
+  },
+  toggleSlide: function(id) {
+    console.log("something worked");
+    var index = state.data.map(function (el) {
+      return (
+        el.ItemIndex
+      );
+    });
+    var currentIndex = index.indexOf(id);
+    state.currentSlide = currentIndex;
+    render(state);
+  }
+}
+
 
 function render(state) {
   var hasData = state.data.length > 0;

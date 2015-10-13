@@ -1,6 +1,7 @@
 ﻿
 body {
     background-color:#000;
+    font-family:arial;
 }
 
 * {
@@ -39,7 +40,7 @@ body {
 }
 
 .slide .caption {
-    bottom: 0px;
+    bottom: 50px;
 }
 
 
@@ -55,23 +56,40 @@ body {
     background: blue none repeat scroll 0 0;
     color: white;
     display: block;
-    padding: 10px;
+    padding: 15px;
     position: absolute;
     cursor:pointer;
     bottom: initial !important;
-    padding: 10px;
     top: 43%;
     z-index: 9999;
 }
 .toggle--prev {
     left: 10px;
+    background: #000 url(../images/nav.png) no-repeat 10px 50%;
+    width: 28px;
+    height: 100%;
+    position:absolute;
+    top:0;
 }
 .toggle--next {
     right: 10px;
+    background: #000 url(../images/nav.png) no-repeat -30px 50%;
+    width: 28px;
+    height: 100%;
+    position:absolute;
+    top:0;
 }
 .pagination {
-    margin: 20px;
     text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    width: 370px;
+    color: #fff;
+    bottom:20px;
 }
 .pager {
     background-color: red;
@@ -82,4 +100,5 @@ body {
     text-indent: -9000px;
     white-space: nowrap;
     width: 20px;
+    cursor:pointer;
 }
